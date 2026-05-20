@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Truvi — Dashboard Revenue Analysis Jan–Apr 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:#f7f8fa;color:#1C1C2E;font-size:14px}
+.page{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:2px solid #00C896}
+.logo{display:flex;align-items:center;gap:10px}
+.lm{width:36px;height:36px;background:#00C896;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.lm svg{width:20px;height:20px;fill:#fff}
+.ln{font-size:18px;font-weight:700;color:#1C1C2E;letter-spacing:-.02em}
+.ls2{font-size:11px;color:#718096;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.hr{text-align:right}
+.hp{font-size:13px;font-weight:600;color:#1C1C2E}
+.hf{font-size:11px;color:#718096;margin-top:2px}
+.tabs{display:flex;gap:8px;margin-bottom:1.75rem;flex-wrap:wrap}
+.tab{padding:8px 20px;border:1.5px solid #E2E8F0;border-radius:24px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#718096;transition:all .15s}
+.tab:hover{border-color:#00C896;color:#00C896}
+.tab.active{background:#1C1C2E;color:#fff;border-color:#1C1C2E}
+.st{font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.08em;margin:0 0 1rem}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.75rem}
+@media(max-width:700px){.metrics{grid-template-columns:repeat(2,1fr)}}
+.mc{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:14px 16px}
+.mc.hi{background:#E8FAF5;border-color:#00C89650}
+.ml{font-size:10px;color:#718096;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:5px}
+.mv{font-size:22px;font-weight:700;color:#1C1C2E;line-height:1}
+.mc.hi .mv{color:#009B73}
+.ms{font-size:11px;color:#718096;margin-top:4px}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
+@media(max-width:700px){.cg{grid-template-columns:1fr}}
+.cc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 18px}
+.cc.full{grid-column:1/-1}
+.ct{font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#718096}
+.ls{width:9px;height:9px;border-radius:2px;flex-shrink:0}
+.tg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
+@media(max-width:700px){.tg{grid-template-columns:1fr}}
+.tc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 18px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{background:#f7f8fa;font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1.5px solid #E2E8F0}
+td{padding:8px 12px;border-bottom:1px solid #E2E8F0;color:#1C1C2E}
+.tb td{font-weight:700;border-bottom:none}
+.pos{color:#0d7a5f}
+.neg{color:#c0392b}
+.note{background:#E8FAF5;border-left:3px solid #00C896;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:#0d5c47;margin-bottom:1.5rem;line-height:1.6}
+.mom-wrap{background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.mom-note{padding:10px 14px;font-size:12px;color:#718096;border-top:1px solid #E2E8F0;line-height:1.6}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size:11px;color:#718096;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="logo">
+    <div class="lm">
+      <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4" stroke="#00C896" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+    </div>
+    <div>
+      <div class="ln">Truvi</div>
+      <div class="ls2">Dashboard Revenue Analysis</div>
+    </div>
+  </div>
+  <div class="hr">
+    <div class="hp" id="hperiod">January 2026</div>
+    <div class="hf" id="hfy">FY26 — M10</div>
+  </div>
+</header>
+
+<div class="tabs" id="tabs"></div>
+
+<div class="st">Key Metrics</div>
+<div class="metrics" id="metrics"></div>
+
+<div class="st">Product Mix</div>
+<div class="cg">
+  <div class="cc">
+    <div class="ct">Protection by coverage</div>
+    <div class="leg" id="lprot"></div>
+    <div style="position:relative;height:200px"><canvas id="cprot" role="img" aria-label="Protection product mix"></canvas></div>
+  </div>
+  <div class="cc">
+    <div class="ct">Screening by product</div>
+    <div class="leg" id="lscreen"></div>
+    <div style="position:relative;height:200px"><canvas id="cscreen" role="img" aria-label="Screening product mix"></canvas></div>
+  </div>
+</div>
+
+<div class="st">Revenue Detail</div>
+<div class="tg">
+  <div class="tc" id="ptable"></div>
+  <div class="tc" id="stable"></div>
+</div>
+<div class="note" id="dnote"></div>
+
+<div class="st">Trends — Jan to Apr 2026</div>
+<div class="cg">
+  <div class="cc full">
+    <div class="ct">Protection vs Screening — all months</div>
+    <div class="leg">
+      <span class="li"><span class="ls" style="background:#00C896"></span>Protection (incl. Deposit Handling)</span>
+      <span class="li"><span class="ls" style="background:#1C1C2E"></span>Screening</span>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="csplit" role="img" aria-label="Protection vs screening all months"></canvas></div>
+  </div>
+  <div class="cc full">
+    <div class="ct">Protection by coverage — all months</div>
+    <div class="leg" id="ltrend"></div>
+    <div style="position:relative;height:220px"><canvas id="ctrend" role="img" aria-label="Protection by product all months"></canvas></div>
+  </div>
+  <div class="cc full">
+    <div class="ct">Revenue per booking trend</div>
+    <div class="leg">
+      <span class="li"><span class="ls" style="background:#00C896"></span>Total RPB</span>
+      <span class="li"><span class="ls" style="background:#1C1C2E;opacity:.7"></span>Protection RPB</span>
+      <span class="li"><span class="ls" style="background:#7B5EA7"></span>Screening RPB</span>
+    </div>
+    <div style="position:relative;height:200px"><canvas id="crpb" role="img" aria-label="RPB trend all months"></canvas></div>
+  </div>
+</div>
+
+<div class="st" id="momtitle" style="display:none">Month-on-Month Movement</div>
+<div class="mom-wrap" id="momwrap" style="display:none"></div>
+
+<footer>
+  <span>Source: Margin_Jan26_Apr26.xlsx — actuals only</span>
+  <span id="fdate"></span>
+</footer>
+</div>
+
+<script>
+const MONTHS=['Jan 26','Feb 26','Mar 26','Apr 26'];
+const PERIODS=['January 2026','February 2026','March 2026','April 2026'];
+const FY=['FY26 — M10','FY26 — M11','FY26 — M12','FY27 — M01'];
+const T='#00C896',T2='#1C9E75',SL='#3B6B8A',NV='#1C1C2E',PU='#7B5EA7',PK='#D4537E',GR='#888780';
+const PC=[T,T2,SL,NV],SC=[T,PU,PK,SL,GR];
+const PN=['£0 – £500','£500 – £50,000','£500 – £1,000,000','£0 – £1,000,000'];
+const SN=['Screening Plus','ID Verification','Verification Fees','Sex Offenders Check','Criminal Background Check'];
+
+const prot=[[17130,25613,13154,34815],[21419,30190,14154,37421],[24526,47886,17199,52922],[20103,55463,16933,50067]];
+const scrn=[[7440,6738,110,2014,1316],[8907,7698,155,2499,1657],[11677,10039,143,3281,2373],[11107,9498,63,1545,2206]];
+const dep=[10193,10470,11080,8367],dep_per=[2548,2618,2770,2092];
+const bkfee=[3297,3056,2021,1159],lstfee=[884,584,552,-130];
+const ptot=[90712,103185,142533,142566],stot=[17618,20916,27512,24420];
+const dtot=[112511,127741,172618,168015];
+const rpbt=[6.74,6.80,7.59,7.73],rpbp=[7.97,8.22,9.49,9.96],rpbs=[1.06,1.11,1.21,1.12];
+const prate=[68.2,66.8,66.1,65.9],pbk=[11385,12555,15014,14319],tbk=[16687,18781,22729,21741];
+
+const momLabels=['Total Dashboard Revenue','Protection Revenue','Screening Revenue','Protection mix','Screening mix','Protection Rate','RPB (total)','RPB (protection)','RPB (screening)'];
+const momVals=[
+  ['£112,511','£90,712','£17,618','80.6%','15.7%','68.2%','£6.74','£7.97','£1.06'],
+  ['£127,741','£103,185','£20,916','80.8%','16.4%','66.8%','£6.80','£8.22','£1.11'],
+  ['£172,618','£142,533','£27,512','82.6%','15.9%','66.1%','£7.59','£9.49','£1.21'],
+  ['£168,015','£142,566','£24,420','84.9%','14.5%','65.9%','£7.73','£9.96','£1.12']
+];
+const momMov=[
+  null,
+  ['+£15,230 / +13.5%','+£12,473 / +13.7%','+£3,298 / +18.7%','+0.2pp','+0.7pp','-1.4pp','+£0.06','+£0.25','+£0.05'],
+  ['+£44,877 / +35.1%','+£39,348 / +38.1%','+£6,596 / +31.5%','+1.8pp','-0.5pp','-0.7pp','+£0.79','+£1.27','+£0.10'],
+  ['-£4,603 / -2.7%','+£33 / 0.0%','-£3,092 / -11.2%','+2.3pp','-1.4pp','-0.2pp','+£0.14','+£0.47','-£0.09']
+];
+const momNotes=[
+  '',
+  'Revenue +13.5% MoM. Screening growth (+18.7%) outpaced protection (+13.7%). Protection rate slipped -1.4pp to 66.8%.',
+  '£500–£50,000 revenue +80.0% MoM driven by new product codes appearing from March. £0–£1,000,000 +41.4% including new 0-1M product code.',
+  'Protection revenue flat MoM with significant mix shift: £500–£50,000 +15.8%, £0–£500 -18.1%, £0–£1,000,000 -5.4%. Screening -11.2% driven by Sex Offenders Check (-52.9%) on fewer SO bookings (1,185 vs 2,274).'
+];
+
+const charts={};
+function f(n){return '£'+Math.round(n).toLocaleString()}
+function fp(n){return n.toFixed(1)+'%'}
+function mc(s){return s&&s.startsWith('+')?'pos':s&&s.startsWith('-')?'neg':''}
+
+function renderMetrics(i){
+  document.getElementById('hperiod').textContent=PERIODS[i];
+  document.getElementById('hfy').textContent=FY[i];
+  document.getElementById('metrics').innerHTML=[
+    ['Dashboard Revenue',f(dtot[i]),PERIODS[i],true],
+    ['Protection Revenue',f(ptot[i]),fp(ptot[i]/dtot[i]*100)+' mix',true],
+    ['Screening Revenue',f(stot[i]),fp(stot[i]/dtot[i]*100)+' mix',false],
+    ['Protection Rate',fp(prate[i]),pbk[i].toLocaleString()+' / '+tbk[i].toLocaleString(),false],
+    ['RPB — Total','£'+rpbt[i].toFixed(2),'per booking',false],
+    ['RPB — Protection','£'+rpbp[i].toFixed(2),'per prot. booking',false],
+    ['RPB — Screening','£'+rpbs[i].toFixed(2),'per booking',false],
+    ['Total Bookings',tbk[i].toLocaleString(),'billable',false],
+  ].map(([l,v,s,h])=>`<div class="mc${h?' hi':''}"><div class="ml">${l}</div><div class="mv">${v}</div><div class="ms">${s}</div></div>`).join('');
+}
+
+function renderTables(i){
+  const pa=PN.map((n,j)=>({n,v:prot[i][j]})).filter(x=>x.v>0);
+  document.getElementById('ptable').innerHTML=
+    '<div class="ct">Protection by coverage</div>'+
+    '<table><thead><tr><th>Coverage</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
+    pa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/dtot[i]*100)}</td></tr>`).join('')+
+    `<tr class="tb"><td>Subtotal</td><td>${f(ptot[i])}</td><td>${fp(ptot[i]/dtot[i]*100)}</td></tr></tbody></table>`;
+
+  const sa=SN.map((n,j)=>({n,v:scrn[i][j]})).filter(x=>x.v>0);
+  document.getElementById('stable').innerHTML=
+    '<div class="ct">Screening by product</div>'+
+    '<table><thead><tr><th>Product</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
+    sa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/dtot[i]*100)}</td></tr>`).join('')+
+    `<tr class="tb"><td>Subtotal</td><td>${f(stot[i])}</td><td>${fp(stot[i]/dtot[i]*100)}</td></tr></tbody></table>`;
+
+  document.getElementById('dnote').innerHTML=
+    `<strong>Deposit Handling (${f(dep[i])})</strong> absorbed evenly across ${pa.length} active protection products (${f(dep_per[i])} each), included in Protection figures above. `+
+    `Booking Fees (${f(bkfee[i])}) and Listing Fees (${f(lstfee[i])}) are legacy wind-down lines presented separately in the full monthly Notion page.`;
+}
+
+function renderMoM(i){
+  const w=document.getElementById('momwrap'),t=document.getElementById('momtitle');
+  if(i===0){w.style.display='none';t.style.display='none';return;}
+  t.style.display='block';w.style.display='block';
+  const cur=momVals[i],prev=momVals[i-1],mov=momMov[i];
+  w.innerHTML='<table><thead><tr><th>Metric</th><th>'+MONTHS[i]+'</th><th>'+MONTHS[i-1]+'</th><th>Movement</th></tr></thead><tbody>'+
+    momLabels.map((l,j)=>`<tr><td>${l}</td><td>${cur[j]}</td><td>${prev[j]}</td><td class="${mc(mov[j])}">${mov[j]}</td></tr>`).join('')+
+    '</tbody></table><div class="mom-note">'+momNotes[i]+'</div>';
+}
+
+function donut(id,data,cols){
+  if(charts[id]){charts[id].data.datasets[0].data=data;charts[id].data.datasets[0].backgroundColor=cols;charts[id].update();return;}
+  charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{datasets:[{data,backgroundColor:cols,borderWidth:3,borderColor:'#f7f8fa'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const t=data.reduce((a,b)=>a+b,0);return ' '+f(c.parsed)+' ('+(c.parsed/t*100).toFixed(1)+'%)';}}}}}});
+}
+
+function legend(id,names,cols){
+  document.getElementById(id).innerHTML=names.map((n,j)=>`<span class="li"><span class="ls" style="background:${cols[j]}"></span>${n}</span>`).join('');
+}
+
+function setMonth(i){
+  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
+  renderMetrics(i);
+  const pd=prot[i].filter(v=>v>0),pc2=prot[i].map((v,j)=>v>0?PC[j]:null).filter(Boolean);
+  const pn2=PN.filter((_,j)=>prot[i][j]>0);
+  legend('lprot',pn2,pc2);
+  donut('cprot',pd,pc2);
+  const sd=scrn[i].filter(v=>v>0),sc2=scrn[i].map((v,j)=>v>0?SC[j]:null).filter(Boolean);
+  const sn2=SN.filter((_,j)=>scrn[i][j]>0);
+  legend('lscreen',sn2,sc2);
+  donut('cscreen',sd,sc2);
+  renderTables(i);
+  renderMoM(i);
+}
+
+function buildTrends(){
+  legend('ltrend',PN,PC);
+  charts.csplit=new Chart(document.getElementById('csplit'),{type:'bar',data:{labels:MONTHS,datasets:[{label:'Protection',data:ptot,backgroundColor:T,borderRadius:4,borderSkipped:false,stack:'s'},{label:'Screening',data:stot,backgroundColor:NV,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}},stacked:true},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'},stacked:true}}}});
+
+  charts.ctrend=new Chart(document.getElementById('ctrend'),{type:'bar',data:{labels:MONTHS,datasets:PN.map((n,i)=>({label:n,data:prot.map(m=>m[i]),backgroundColor:PC[i],borderRadius:3,borderSkipped:false}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'}}}}});
+
+  charts.crpb=new Chart(document.getElementById('crpb'),{type:'line',data:{labels:MONTHS,datasets:[{label:'Total RPB',data:rpbt,borderColor:T,pointBackgroundColor:T,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent'},{label:'Protection RPB',data:rpbp,borderColor:NV,pointBackgroundColor:NV,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[5,3]},{label:'Screening RPB',data:rpbs,borderColor:PU,pointBackgroundColor:PU,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[2,2]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>' £'+c.parsed.y.toFixed(2)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+v.toFixed(2)},min:0,max:12}}}});
+}
+
+const tabsEl=document.getElementById('tabs');
+MONTHS.forEach((m,i)=>{const b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent=m;b.onclick=()=>setMonth(i);tabsEl.appendChild(b);});
+document.getElementById('fdate').textContent='Generated '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+setMonth(0);
+buildTrends();
+</script>
+</body>
+</html>
