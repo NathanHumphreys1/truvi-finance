@@ -7,51 +7,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:#f7f8fa;color:#1C1C2E;font-size:14px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:#F7EFE5;color:#242424;font-size:14px}
 .page{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:2px solid #00C896}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:2px solid #FF40C1}
 .logo{display:flex;align-items:center;gap:10px}
-.lm{width:36px;height:36px;background:#00C896;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.lm{width:36px;height:36px;background:#FF40C1;border-radius:8px;display:flex;align-items:center;justify-content:center}
 .lm svg{width:20px;height:20px;fill:#fff}
-.ln{font-size:18px;font-weight:700;color:#1C1C2E;letter-spacing:-.02em}
-.ls2{font-size:11px;color:#718096;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.ln{font-size:18px;font-weight:700;color:#242424;letter-spacing:-.02em}
+.ls2{font-size:11px;color:#7A7A7A;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
 .hr{text-align:right}
-.hp{font-size:13px;font-weight:600;color:#1C1C2E}
-.hf{font-size:11px;color:#718096;margin-top:2px}
+.hp{font-size:13px;font-weight:600;color:#242424}
+.hf{font-size:11px;color:#7A7A7A;margin-top:2px}
 .tabs{display:flex;gap:8px;margin-bottom:1.75rem;flex-wrap:wrap}
-.tab{padding:8px 20px;border:1.5px solid #E2E8F0;border-radius:24px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#718096;transition:all .15s}
-.tab:hover{border-color:#00C896;color:#00C896}
-.tab.active{background:#1C1C2E;color:#fff;border-color:#1C1C2E}
-.st{font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.08em;margin:0 0 1rem}
+.tab{padding:8px 20px;border:1.5px solid #BBC9DB;border-radius:24px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#7A7A7A;transition:all .15s}
+.tab:hover{border-color:#FF40C1;color:#FF40C1}
+.tab.active{background:#242424;color:#fff;border-color:#242424}
+.st{font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.08em;margin:0 0 1rem}
 .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.75rem}
 @media(max-width:700px){.metrics{grid-template-columns:repeat(2,1fr)}}
-.mc{background:#fff;border:1px solid #E2E8F0;border-radius:10px;padding:14px 16px}
-.mc.hi{background:#E8FAF5;border-color:#00C89650}
-.ml{font-size:10px;color:#718096;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:5px}
-.mv{font-size:22px;font-weight:700;color:#1C1C2E;line-height:1}
-.mc.hi .mv{color:#009B73}
-.ms{font-size:11px;color:#718096;margin-top:4px}
+.mc{background:#fff;border:1px solid #BBC9DB;border-radius:10px;padding:14px 16px}
+.mc.hi{background:#FFF0FA;border-color:#FF40C150}
+.ml{font-size:10px;color:#7A7A7A;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:5px}
+.mv{font-size:22px;font-weight:700;color:#242424;line-height:1}
+.mc.hi .mv{color:#FF40C1}
+.ms{font-size:11px;color:#7A7A7A;margin-top:4px}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
 @media(max-width:700px){.cg{grid-template-columns:1fr}}
-.cc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 18px}
+.cc{background:#fff;border:1px solid #BBC9DB;border-radius:12px;padding:16px 18px}
 .cc.full{grid-column:1/-1}
-.ct{font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
+.ct{font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
 .leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
-.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#718096}
+.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#7A7A7A}
 .ls{width:9px;height:9px;border-radius:2px;flex-shrink:0}
 .tg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
 @media(max-width:700px){.tg{grid-template-columns:1fr}}
-.tc{background:#fff;border:1px solid #E2E8F0;border-radius:12px;padding:16px 18px}
+.tc{background:#fff;border:1px solid #BBC9DB;border-radius:12px;padding:16px 18px}
 table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#f7f8fa;font-size:11px;font-weight:700;color:#718096;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1.5px solid #E2E8F0}
-td{padding:8px 12px;border-bottom:1px solid #E2E8F0;color:#1C1C2E}
+th{background:#F7EFE5;font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1.5px solid #BBC9DB}
+td{padding:8px 12px;border-bottom:1px solid #BBC9DB;color:#242424}
 .tb td{font-weight:700;border-bottom:none}
-.pos{color:#0d7a5f}
-.neg{color:#c0392b}
-.note{background:#E8FAF5;border-left:3px solid #00C896;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:#0d5c47;margin-bottom:1.5rem;line-height:1.6}
-.mom-wrap{background:#fff;border:1px solid #E2E8F0;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
-.mom-note{padding:10px 14px;font-size:12px;color:#718096;border-top:1px solid #E2E8F0;line-height:1.6}
-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size:11px;color:#718096;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.pos{color:#4B5EE4}
+.neg{color:#FF793A}
+.note{background:#FFF0FA;border-left:3px solid #FF40C1;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:#242424;margin-bottom:1.5rem;line-height:1.6}
+.mom-wrap{background:#fff;border:1px solid #BBC9DB;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
+.mom-note{padding:10px 14px;font-size:12px;color:#7A7A7A;border-top:1px solid #BBC9DB;line-height:1.6}
+footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #BBC9DB;font-size:11px;color:#7A7A7A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
 </style>
 </head>
 <body>
@@ -60,7 +60,7 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size
 <header>
   <div class="logo">
     <div class="lm">
-      <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4" stroke="#00C896" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+      <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4" stroke="#FF40C1" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
     </div>
     <div>
       <div class="ln">Truvi</div>
@@ -104,8 +104,8 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size
   <div class="cc full">
     <div class="ct">Protection vs Screening — all months</div>
     <div class="leg">
-      <span class="li"><span class="ls" style="background:#00C896"></span>Protection (incl. Deposit Handling)</span>
-      <span class="li"><span class="ls" style="background:#1C1C2E"></span>Screening</span>
+      <span class="li"><span class="ls" style="background:#FF40C1"></span>Protection (incl. Deposit Handling)</span>
+      <span class="li"><span class="ls" style="background:#242424"></span>Screening</span>
     </div>
     <div style="position:relative;height:200px"><canvas id="csplit" role="img" aria-label="Protection vs screening all months"></canvas></div>
   </div>
@@ -117,9 +117,9 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size
   <div class="cc full">
     <div class="ct">Revenue per booking trend</div>
     <div class="leg">
-      <span class="li"><span class="ls" style="background:#00C896"></span>Total RPB</span>
-      <span class="li"><span class="ls" style="background:#1C1C2E;opacity:.7"></span>Protection RPB</span>
-      <span class="li"><span class="ls" style="background:#7B5EA7"></span>Screening RPB</span>
+      <span class="li"><span class="ls" style="background:#FF40C1"></span>Total RPB</span>
+      <span class="li"><span class="ls" style="background:#242424;opacity:.7"></span>Protection RPB</span>
+      <span class="li"><span class="ls" style="background:#4B5EE4"></span>Screening RPB</span>
     </div>
     <div style="position:relative;height:200px"><canvas id="crpb" role="img" aria-label="RPB trend all months"></canvas></div>
   </div>
@@ -138,19 +138,40 @@ footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #E2E8F0;font-size
 const MONTHS=['Jan 26','Feb 26','Mar 26','Apr 26'];
 const PERIODS=['January 2026','February 2026','March 2026','April 2026'];
 const FY=['FY26 — M10','FY26 — M11','FY26 — M12','FY27 — M01'];
-const T='#00C896',T2='#1C9E75',SL='#3B6B8A',NV='#1C1C2E',PU='#7B5EA7',PK='#D4537E',GR='#888780';
-const PC=[T,T2,SL,NV],SC=[T,PU,PK,SL,GR];
-const PN=['£0 – £500','£500 – £50,000','£500 – £1,000,000','£0 – £1,000,000'];
-const SN=['Screening Plus','ID Verification','Verification Fees','Sex Offenders Check','Criminal Background Check'];
+const T='#FF40C1',T2='#FF793A',SL='#4B5EE4',NV='#242424',PU='#4B5EE4',PK='#FF793A',GR='#BBC9DB';
+const PC=[T,T2,SL,NV],SC=[T,PU,PK,SL];
 
-const prot=[[17130,25613,13154,34815],[21419,30190,14154,37421],[24526,47886,17199,52922],[20103,55463,16933,50067]];
-const scrn=[[7440,6738,110,2014,1316],[8907,7698,155,2499,1657],[11677,10039,143,3281,2373],[11107,9498,63,1545,2206]];
+// Standing correction: 4th tier label is £500 – £5,000,000 (not £0 – £1,000,000)
+const PN=['£0 – £500','£500 – £50,000','£500 – £1,000,000','£500 – £5,000,000'];
+const SN=['Screening Plus','ID Verification','Sex Offenders Check','Criminal Background Check'];
+
+// Protection tier revenue (deposit-absorbed). Array order: [0-500, 500-50K, 500-1M, 500-5M]
+// Jan: 4 tiers, dep £10,193 / 4 = £2,548 each
+// Feb: 4 tiers, dep £10,470 / 4 = £2,618 each
+// Mar: 4 tiers, dep £11,080 / 4 = £2,770 each
+// Apr: 4 tiers, dep £8,367 / 4 = £2,092 each
+const prot=[
+  [17130,25613,13154,34815],
+  [21419,30190,14154,37421],
+  [24526,47886,17199,52922],
+  [20103,55463,16933,50067]
+];
+
+// Screening revenue. Array order: [Screening Plus, ID Verification, Sex Offenders Check, Criminal Background Check]
+const scrn=[
+  [7440,6848,2014,1316],
+  [8907,7853,2499,1657],
+  [11677,10181,3281,2373],
+  [11107,9561,1545,2206]
+];
+
 const dep=[10193,10470,11080,8367],dep_per=[2548,2618,2770,2092];
 const bkfee=[3297,3056,2021,1159],lstfee=[884,584,552,-130];
 const ptot=[90712,103185,142533,142566],stot=[17618,20916,27512,24420];
 const dtot=[112511,127741,172618,168015];
 const rpbt=[6.74,6.80,7.59,7.73],rpbp=[7.97,8.22,9.49,9.96],rpbs=[1.06,1.11,1.21,1.12];
 const prate=[68.2,66.8,66.1,65.9],pbk=[11385,12555,15014,14319],tbk=[16687,18781,22729,21741];
+const sobk=[1252,1801,2274,1185],cbbk=[259,346,458,238];
 
 const momLabels=['Total Dashboard Revenue','Protection Revenue','Screening Revenue','Protection mix','Screening mix','Protection Rate','RPB (total)','RPB (protection)','RPB (screening)'];
 const momVals=[
@@ -167,15 +188,15 @@ const momMov=[
 ];
 const momNotes=[
   '',
-  'Revenue +13.5% MoM. Screening growth (+18.7%) outpaced protection (+13.7%). Protection rate slipped -1.4pp to 66.8%.',
-  '£500–£50,000 revenue +80.0% MoM driven by new product codes appearing from March. £0–£1,000,000 +41.4% including new 0-1M product code.',
-  'Protection revenue flat MoM with significant mix shift: £500–£50,000 +15.8%, £0–£500 -18.1%, £0–£1,000,000 -5.4%. Screening -11.2% driven by Sex Offenders Check (-52.9%) on fewer SO bookings (1,185 vs 2,274).'
+  'Revenue +13.5% MoM. Screening growth (+18.7%) outpaced Protection (+13.7%). Protection rate slipped -1.4pp to 66.8% — bookings grew faster than protected bookings. RPB (protection) improved to £8.22.',
+  'Strong month: +35.1% MoM revenue. Protection +38.1% driven by £500–£50,000 (+58.6% MoM) and £500–£5,000,000 (+41.4% MoM). RPB (protection) surged to £9.49 (+£1.27), the strongest single-month uplift in the period.',
+  'Revenue broadly flat MoM (-2.7%). Protection held in absolute terms (+£33) with RPB reaching £9.96 — series high. Significant mix shift: £500–£50,000 grew to 38.9% of protection (from 33.6%). Screening -11.2% on sharply lower Sex Offenders Check bookings (1,185 vs 2,274). Listing Fees negative (-£130) — credit/adjustment.'
 ];
 
 const charts={};
 function f(n){return '£'+Math.round(n).toLocaleString()}
 function fp(n){return n.toFixed(1)+'%'}
-function mc(s){return s&&s.startsWith('+')?'pos':s&&s.startsWith('-')?'neg':''}
+function mc(s){return s&&s.startsWith('+')?'pos':s&&(s.startsWith('-')||s.startsWith('−'))?'neg':''}
 
 function renderMetrics(i){
   document.getElementById('hperiod').textContent=PERIODS[i];
@@ -184,7 +205,7 @@ function renderMetrics(i){
     ['Dashboard Revenue',f(dtot[i]),PERIODS[i],true],
     ['Protection Revenue',f(ptot[i]),fp(ptot[i]/dtot[i]*100)+' mix',true],
     ['Screening Revenue',f(stot[i]),fp(stot[i]/dtot[i]*100)+' mix',false],
-    ['Protection Rate',fp(prate[i]),pbk[i].toLocaleString()+' / '+tbk[i].toLocaleString(),false],
+    ['Protection Rate',fp(prate[i]),pbk[i].toLocaleString()+' / '+tbk[i].toLocaleString()+' bookings',false],
     ['RPB — Total','£'+rpbt[i].toFixed(2),'per booking',false],
     ['RPB — Protection','£'+rpbp[i].toFixed(2),'per prot. booking',false],
     ['RPB — Screening','£'+rpbs[i].toFixed(2),'per booking',false],
@@ -197,19 +218,20 @@ function renderTables(i){
   document.getElementById('ptable').innerHTML=
     '<div class="ct">Protection by coverage</div>'+
     '<table><thead><tr><th>Coverage</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
-    pa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/dtot[i]*100)}</td></tr>`).join('')+
-    `<tr class="tb"><td>Subtotal</td><td>${f(ptot[i])}</td><td>${fp(ptot[i]/dtot[i]*100)}</td></tr></tbody></table>`;
+    pa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/ptot[i]*100)}</td></tr>`).join('')+
+    `<tr class="tb"><td>Subtotal</td><td>${f(ptot[i])}</td><td>100.0%</td></tr></tbody></table>`;
 
-  const sa=SN.map((n,j)=>({n,v:scrn[i][j]})).filter(x=>x.v>0);
+  const sa=SN.map((n,j)=>({n,v:scrn[i][j]})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
   document.getElementById('stable').innerHTML=
     '<div class="ct">Screening by product</div>'+
-    '<table><thead><tr><th>Product</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
-    sa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/dtot[i]*100)}</td></tr>`).join('')+
-    `<tr class="tb"><td>Subtotal</td><td>${f(stot[i])}</td><td>${fp(stot[i]/dtot[i]*100)}</td></tr></tbody></table>`;
+    '<table><thead><tr><th>#</th><th>Product</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
+    sa.map(({n,v},r)=>`<tr><td style="color:#7A7A7A;font-size:11px;font-weight:700">${r+1}</td><td>${n}</td><td>${f(v)}</td><td>${fp(v/stot[i]*100)}</td></tr>`).join('')+
+    `<tr class="tb"><td></td><td>Subtotal</td><td>${f(stot[i])}</td><td>100.0%</td></tr></tbody></table>`;
 
+  const lstNote=lstfee[i]<0?' <strong style="color:#FF793A">(negative — credit/adjustment)</strong>':'';
   document.getElementById('dnote').innerHTML=
     `<strong>Deposit Handling (${f(dep[i])})</strong> absorbed evenly across ${pa.length} active protection products (${f(dep_per[i])} each), included in Protection figures above. `+
-    `Booking Fees (${f(bkfee[i])}) and Listing Fees (${f(lstfee[i])}) are legacy wind-down lines presented separately in the full monthly Notion page.`;
+    `Booking Fees (${f(bkfee[i])}) and Listing Fees (${f(lstfee[i])})${lstNote} are legacy wind-down lines presented separately in the full monthly Notion page.`;
 }
 
 function renderMoM(i){
@@ -224,7 +246,7 @@ function renderMoM(i){
 
 function donut(id,data,cols){
   if(charts[id]){charts[id].data.datasets[0].data=data;charts[id].data.datasets[0].backgroundColor=cols;charts[id].update();return;}
-  charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{datasets:[{data,backgroundColor:cols,borderWidth:3,borderColor:'#f7f8fa'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const t=data.reduce((a,b)=>a+b,0);return ' '+f(c.parsed)+' ('+(c.parsed/t*100).toFixed(1)+'%)';}}}}}});
+  charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{datasets:[{data,backgroundColor:cols,borderWidth:3,borderColor:'#F7EFE5'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const t=data.reduce((a,b)=>a+b,0);return ' '+f(c.parsed)+' ('+(c.parsed/t*100).toFixed(1)+'%)';}}}}}}); 
 }
 
 function legend(id,names,cols){
@@ -248,11 +270,11 @@ function setMonth(i){
 
 function buildTrends(){
   legend('ltrend',PN,PC);
-  charts.csplit=new Chart(document.getElementById('csplit'),{type:'bar',data:{labels:MONTHS,datasets:[{label:'Protection',data:ptot,backgroundColor:T,borderRadius:4,borderSkipped:false,stack:'s'},{label:'Screening',data:stot,backgroundColor:NV,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}},stacked:true},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'},stacked:true}}}});
+  charts.csplit=new Chart(document.getElementById('csplit'),{type:'bar',data:{labels:MONTHS,datasets:[{label:'Protection',data:ptot,backgroundColor:T,borderRadius:4,borderSkipped:false,stack:'s'},{label:'Screening',data:stot,backgroundColor:NV,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}},stacked:true},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'},stacked:true}}}});
 
-  charts.ctrend=new Chart(document.getElementById('ctrend'),{type:'bar',data:{labels:MONTHS,datasets:PN.map((n,i)=>({label:n,data:prot.map(m=>m[i]),backgroundColor:PC[i],borderRadius:3,borderSkipped:false}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'}}}}});
+  charts.ctrend=new Chart(document.getElementById('ctrend'),{type:'bar',data:{labels:MONTHS,datasets:PN.map((n,i)=>({label:n,data:prot.map(m=>m[i]),backgroundColor:PC[i],borderRadius:3,borderSkipped:false}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'}}}}});
 
-  charts.crpb=new Chart(document.getElementById('crpb'),{type:'line',data:{labels:MONTHS,datasets:[{label:'Total RPB',data:rpbt,borderColor:T,pointBackgroundColor:T,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent'},{label:'Protection RPB',data:rpbp,borderColor:NV,pointBackgroundColor:NV,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[5,3]},{label:'Screening RPB',data:rpbs,borderColor:PU,pointBackgroundColor:PU,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[2,2]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>' £'+c.parsed.y.toFixed(2)}}},scales:{x:{grid:{display:false},ticks:{color:'#718096',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.06)'},ticks:{color:'#718096',font:{size:11},callback:v=>'£'+v.toFixed(2)},min:0,max:12}}}});
+  charts.crpb=new Chart(document.getElementById('crpb'),{type:'line',data:{labels:MONTHS,datasets:[{label:'Total RPB',data:rpbt,borderColor:T,pointBackgroundColor:T,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent'},{label:'Protection RPB',data:rpbp,borderColor:NV,pointBackgroundColor:NV,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[5,3]},{label:'Screening RPB',data:rpbs,borderColor:PU,pointBackgroundColor:PU,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[2,2]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>' £'+c.parsed.y.toFixed(2)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+v.toFixed(2)},min:0,max:12}}}});
 }
 
 const tabsEl=document.getElementById('tabs');
