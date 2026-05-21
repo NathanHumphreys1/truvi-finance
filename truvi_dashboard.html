@@ -3,283 +3,512 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Truvi — Dashboard Revenue Analysis Jan–Apr 2026</title>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<title>Truvi Dashboard Revenue Analysis</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:#F7EFE5;color:#242424;font-size:14px}
-.page{max-width:960px;margin:0 auto;padding:2rem 1.5rem 4rem}
-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:1.25rem;border-bottom:2px solid #FF40C1}
-.logo{display:flex;align-items:center;gap:10px}
-.lm{width:36px;height:36px;background:#FF40C1;border-radius:8px;display:flex;align-items:center;justify-content:center}
-.lm svg{width:20px;height:20px;fill:#fff}
-.ln{font-size:18px;font-weight:700;color:#242424;letter-spacing:-.02em}
-.ls2{font-size:11px;color:#7A7A7A;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
-.hr{text-align:right}
-.hp{font-size:13px;font-weight:600;color:#242424}
-.hf{font-size:11px;color:#7A7A7A;margin-top:2px}
-.tabs{display:flex;gap:8px;margin-bottom:1.75rem;flex-wrap:wrap}
-.tab{padding:8px 20px;border:1.5px solid #BBC9DB;border-radius:24px;cursor:pointer;font-size:13px;font-weight:500;background:#fff;color:#7A7A7A;transition:all .15s}
-.tab:hover{border-color:#FF40C1;color:#FF40C1}
-.tab.active{background:#242424;color:#fff;border-color:#242424}
-.st{font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.08em;margin:0 0 1rem}
-.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.75rem}
-@media(max-width:700px){.metrics{grid-template-columns:repeat(2,1fr)}}
-.mc{background:#fff;border:1px solid #BBC9DB;border-radius:10px;padding:14px 16px}
-.mc.hi{background:#FFF0FA;border-color:#FF40C150}
-.ml{font-size:10px;color:#7A7A7A;text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:5px}
-.mv{font-size:22px;font-weight:700;color:#242424;line-height:1}
-.mc.hi .mv{color:#FF40C1}
-.ms{font-size:11px;color:#7A7A7A;margin-top:4px}
-.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
-@media(max-width:700px){.cg{grid-template-columns:1fr}}
-.cc{background:#fff;border:1px solid #BBC9DB;border-radius:12px;padding:16px 18px}
-.cc.full{grid-column:1/-1}
-.ct{font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px}
-.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px}
-.li{display:flex;align-items:center;gap:5px;font-size:11px;color:#7A7A7A}
-.ls{width:9px;height:9px;border-radius:2px;flex-shrink:0}
-.tg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem}
-@media(max-width:700px){.tg{grid-template-columns:1fr}}
-.tc{background:#fff;border:1px solid #BBC9DB;border-radius:12px;padding:16px 18px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{background:#F7EFE5;font-size:11px;font-weight:700;color:#7A7A7A;text-transform:uppercase;letter-spacing:.05em;padding:8px 12px;text-align:left;border-bottom:1.5px solid #BBC9DB}
-td{padding:8px 12px;border-bottom:1px solid #BBC9DB;color:#242424}
-.tb td{font-weight:700;border-bottom:none}
-.pos{color:#4B5EE4}
-.neg{color:#FF793A}
-.note{background:#FFF0FA;border-left:3px solid #FF40C1;border-radius:0 8px 8px 0;padding:12px 14px;font-size:12px;color:#242424;margin-bottom:1.5rem;line-height:1.6}
-.mom-wrap{background:#fff;border:1px solid #BBC9DB;border-radius:12px;overflow:hidden;margin-bottom:1.5rem}
-.mom-note{padding:10px 14px;font-size:12px;color:#7A7A7A;border-top:1px solid #BBC9DB;line-height:1.6}
-footer{margin-top:2.5rem;padding-top:1rem;border-top:1px solid #BBC9DB;font-size:11px;color:#7A7A7A;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #F7EFE5; color: #242424; font-size: 14px; line-height: 1.5; }
+  .page { max-width: 960px; margin: 0 auto; padding: 24px 20px 48px; }
+
+  /* HEADER */
+  .header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 16px; border-bottom: 2px solid #FF40C1; margin-bottom: 24px; }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .logo { width: 36px; height: 36px; background: #FF40C1; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo svg { width: 20px; height: 20px; }
+  .wordmark { font-size: 18px; font-weight: 700; color: #242424; letter-spacing: -0.3px; }
+  .wordmark span { color: #FF40C1; }
+  .period-label { font-size: 12px; color: #6b7280; font-weight: 500; }
+
+  /* TABS */
+  .tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+  .tab { padding: 6px 16px; border-radius: 20px; border: 1.5px solid #BBC9DB; background: #fff; color: #242424; font-size: 13px; font-weight: 500; cursor: pointer; transition: border-color 0.15s, color 0.15s, background 0.15s; }
+  .tab:hover { border-color: #FF40C1; color: #FF40C1; }
+  .tab.active { background: #242424; border-color: #242424; color: #fff; }
+
+  /* METRICS STRIP */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .card { background: #fff; border-radius: 8px; padding: 14px 16px; border: 1px solid #e5e0d8; }
+  .card.hi { background: #FFF0FA; border-color: #ffd6f0; }
+  .card-label { font-size: 11px; color: #6b7280; font-weight: 500; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 4px; }
+  .card-value { font-size: 20px; font-weight: 700; color: #242424; }
+  .card.hi .card-value { color: #FF40C1; }
+
+  /* CHARTS ROW */
+  .charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 28px; }
+  .chart-wrap { background: #fff; border-radius: 8px; padding: 18px; border: 1px solid #e5e0d8; }
+  .chart-title { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 12px; }
+  .chart-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #444; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .chart-canvas-wrap { position: relative; height: 160px; }
+
+  /* TABLES */
+  .tables-row { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 16px; }
+  .table-wrap { background: #fff; border-radius: 8px; border: 1px solid #e5e0d8; overflow: hidden; }
+  .table-title { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; padding: 14px 16px 10px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background: #F7EFE5; font-size: 11px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.3px; padding: 8px 12px; text-align: left; border-bottom: 1px solid #BBC9DB; }
+  th:not(:first-child) { text-align: right; }
+  td { padding: 8px 12px; font-size: 13px; border-bottom: 1px solid #f0ebe3; color: #242424; }
+  td:not(:first-child) { text-align: right; }
+  tr:last-child td { border-bottom: none; }
+  tr.tb td { font-weight: 700; background: #F7EFE5; border-top: 1px solid #BBC9DB; }
+
+  /* NOTE CALLOUT */
+  .note { background: #FFF0FA; border-left: 3px solid #FF40C1; border-radius: 0 6px 6px 0; padding: 12px 14px; margin-bottom: 24px; font-size: 12.5px; color: #444; line-height: 1.6; }
+  .note strong { color: #242424; }
+  .neg { color: #FF793A; font-weight: 600; }
+
+  /* RECON LINE */
+  .recon { font-size: 13px; font-weight: 700; color: #242424; padding: 12px 0; margin-bottom: 24px; border-top: 1px solid #e5e0d8; border-bottom: 1px solid #e5e0d8; }
+
+  /* MOM SECTION */
+  .mom-wrap { background: #fff; border-radius: 8px; border: 1px solid #e5e0d8; overflow: hidden; margin-bottom: 24px; }
+  .mom-title { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; padding: 14px 16px 10px; border-bottom: 1px solid #f0ebe3; }
+  .pos { color: #4B5EE4; font-weight: 600; }
+  .neg-val { color: #FF793A; font-weight: 600; }
+  .mom-note { font-size: 12.5px; color: #555; padding: 12px 16px; background: #fafaf8; border-top: 1px solid #f0ebe3; line-height: 1.6; }
+
+  /* TRENDS */
+  .trends { margin-bottom: 28px; }
+  .trend-wrap { background: #fff; border-radius: 8px; padding: 18px; border: 1px solid #e5e0d8; margin-bottom: 16px; }
+  .trend-title { font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px; margin-bottom: 14px; }
+  .trend-canvas-wrap { position: relative; height: 200px; }
+
+  /* FOOTER */
+  .footer { display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #BBC9DB; font-size: 11px; color: #9ca3af; margin-top: 8px; }
+
+  /* Section heading */
+  .section-heading { font-size: 13px; font-weight: 700; color: #242424; margin-bottom: 14px; letter-spacing: -0.1px; }
+
+  @media (max-width: 620px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .charts-row, .tables-row { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div class="page">
 
-<header>
-  <div class="logo">
-    <div class="lm">
-      <svg viewBox="0 0 20 20"><circle cx="10" cy="10" r="8"/><path d="M7 10l2 2 4-4" stroke="#FF40C1" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo">
+        <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="8" fill="white"/>
+          <path d="M6.5 10.5L9 13L13.5 8" stroke="#FF40C1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="wordmark">trüvi<span>.</span></div>
+        <div class="period-label">Dashboard Revenue Analysis</div>
+      </div>
     </div>
-    <div>
-      <div class="ln">Truvi</div>
-      <div class="ls2">Dashboard Revenue Analysis</div>
+    <div class="period-label">Jan 2026 – Apr 2026</div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tabs" id="tabs"></div>
+
+  <!-- PER-MONTH CONTENT -->
+  <div id="month-content"></div>
+
+  <!-- TRENDS -->
+  <div class="trends">
+    <div class="section-heading">Trends — All Months</div>
+    <div class="trend-wrap">
+      <div class="trend-title">Protection vs Screening Revenue</div>
+      <div class="trend-canvas-wrap"><canvas id="trendStack"></canvas></div>
+    </div>
+    <div class="trend-wrap">
+      <div class="trend-title">Protection Revenue by Tier</div>
+      <div class="trend-canvas-wrap"><canvas id="trendTier"></canvas></div>
+    </div>
+    <div class="trend-wrap">
+      <div class="trend-title">Revenue per Booking (RPB)</div>
+      <div class="trend-canvas-wrap"><canvas id="trendRPB"></canvas></div>
     </div>
   </div>
-  <div class="hr">
-    <div class="hp" id="hperiod">January 2026</div>
-    <div class="hf" id="hfy">FY26 — M10</div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>Source: Jan26_-_Apr26_Margin_Data.xlsx | Truvi Pricing & Product Finance</span>
+    <span>Generated: 21 May 2026</span>
   </div>
-</header>
 
-<div class="tabs" id="tabs"></div>
-
-<div class="st">Key Metrics</div>
-<div class="metrics" id="metrics"></div>
-
-<div class="st">Product Mix</div>
-<div class="cg">
-  <div class="cc">
-    <div class="ct">Protection by coverage</div>
-    <div class="leg" id="lprot"></div>
-    <div style="position:relative;height:200px"><canvas id="cprot" role="img" aria-label="Protection product mix"></canvas></div>
-  </div>
-  <div class="cc">
-    <div class="ct">Screening by product</div>
-    <div class="leg" id="lscreen"></div>
-    <div style="position:relative;height:200px"><canvas id="cscreen" role="img" aria-label="Screening product mix"></canvas></div>
-  </div>
-</div>
-
-<div class="st">Revenue Detail</div>
-<div class="tg">
-  <div class="tc" id="ptable"></div>
-  <div class="tc" id="stable"></div>
-</div>
-<div class="note" id="dnote"></div>
-
-<div class="st">Trends — Jan to Apr 2026</div>
-<div class="cg">
-  <div class="cc full">
-    <div class="ct">Protection vs Screening — all months</div>
-    <div class="leg">
-      <span class="li"><span class="ls" style="background:#FF40C1"></span>Protection (incl. Deposit Handling)</span>
-      <span class="li"><span class="ls" style="background:#242424"></span>Screening</span>
-    </div>
-    <div style="position:relative;height:200px"><canvas id="csplit" role="img" aria-label="Protection vs screening all months"></canvas></div>
-  </div>
-  <div class="cc full">
-    <div class="ct">Protection by coverage — all months</div>
-    <div class="leg" id="ltrend"></div>
-    <div style="position:relative;height:220px"><canvas id="ctrend" role="img" aria-label="Protection by product all months"></canvas></div>
-  </div>
-  <div class="cc full">
-    <div class="ct">Revenue per booking trend</div>
-    <div class="leg">
-      <span class="li"><span class="ls" style="background:#FF40C1"></span>Total RPB</span>
-      <span class="li"><span class="ls" style="background:#242424;opacity:.7"></span>Protection RPB</span>
-      <span class="li"><span class="ls" style="background:#4B5EE4"></span>Screening RPB</span>
-    </div>
-    <div style="position:relative;height:200px"><canvas id="crpb" role="img" aria-label="RPB trend all months"></canvas></div>
-  </div>
-</div>
-
-<div class="st" id="momtitle" style="display:none">Month-on-Month Movement</div>
-<div class="mom-wrap" id="momwrap" style="display:none"></div>
-
-<footer>
-  <span>Source: Margin_Jan26_Apr26.xlsx — actuals only</span>
-  <span id="fdate"></span>
-</footer>
 </div>
 
 <script>
-const MONTHS=['Jan 26','Feb 26','Mar 26','Apr 26'];
-const PERIODS=['January 2026','February 2026','March 2026','April 2026'];
-const FY=['FY26 — M10','FY26 — M11','FY26 — M12','FY27 — M01'];
-const T='#FF40C1',T2='#FF793A',SL='#4B5EE4',NV='#242424',PU='#4B5EE4',PK='#FF793A',GR='#BBC9DB';
-const PC=[T,T2,SL,NV],SC=[T,PU,PK,SL];
-
-// Standing correction: 4th tier label is £500 – £5,000,000 (not £0 – £1,000,000)
-const PN=['£0 – £500','£500 – £50,000','£500 – £1,000,000','£500 – £5,000,000'];
-const SN=['Screening Plus','ID Verification','Sex Offenders Check','Criminal Background Check'];
-
-// Protection tier revenue (deposit-absorbed). Array order: [0-500, 500-50K, 500-1M, 500-5M]
-// Jan: 4 tiers, dep £10,193 / 4 = £2,548 each
-// Feb: 4 tiers, dep £10,470 / 4 = £2,618 each
-// Mar: 4 tiers, dep £11,080 / 4 = £2,770 each
-// Apr: 4 tiers, dep £8,367 / 4 = £2,092 each
-const prot=[
-  [17130,25613,13154,34815],
-  [21419,30190,14154,37421],
-  [24526,47886,17199,52922],
-  [20103,55463,16933,50067]
+// ── DATA ──────────────────────────────────────────────────────────────────────
+const MONTHS = [
+  {
+    label: 'Jan 2026', fy: 'FY26 M10',
+    dashRev: 112511, protRev: 90712, screenRev: 17618, legacyRev: 4181,
+    protRate: 68.2, rpbTotal: 6.74, rpbProt: 7.97, rpbScreen: 1.06,
+    totalBookings: 16687, protBookings: 11385, soBookings: 1252, cbcBookings: 259,
+    tiers: [
+      ['0-500 Protection', 16621, 18.3],
+      ['0-50K Protection', 12647, 13.9],
+      ['500-50K Protection', 14495, 16.0],
+      ['500-1M Protection', 12644, 13.9],
+      ['500-5M Protection', 34305, 37.8],
+    ],
+    screening: [
+      ['Screening Plus', 7440, 42.2],
+      ['ID Verification', 6848, 38.9],
+      ['Sex Offenders Check', 2014, 11.4],
+      ['Criminal Background Check', 1316, 7.5],
+    ],
+    depHandling: 10193, nActiveTiers: 5, depPerTier: 2039,
+    bookingFees: 3297, listingFees: 884, listingNeg: false,
+    mom: null,
+    momNote: null,
+  },
+  {
+    label: 'Feb 2026', fy: 'FY26 M11',
+    dashRev: 127741, protRev: 103185, screenRev: 20916, legacyRev: 3640,
+    protRate: 66.8, rpbTotal: 6.80, rpbProt: 8.22, rpbScreen: 1.11,
+    totalBookings: 18781, protBookings: 12555, soBookings: 1801, cbcBookings: 346,
+    tiers: [
+      ['0-500 Protection', 20896, 20.3],
+      ['0-50K Protection', 15057, 14.6],
+      ['500-50K Protection', 16704, 16.2],
+      ['500-1M Protection', 13631, 13.2],
+      ['500-5M Protection', 36898, 35.8],
+    ],
+    screening: [
+      ['Screening Plus', 8907, 42.6],
+      ['ID Verification', 7853, 37.5],
+      ['Sex Offenders Check', 2499, 11.9],
+      ['Criminal Background Check', 1657, 7.9],
+    ],
+    depHandling: 10470, nActiveTiers: 5, depPerTier: 2094,
+    bookingFees: 3056, listingFees: 584, listingNeg: false,
+    mom: {
+      prior: 'January 2026',
+      rows: [
+        ['Total Dashboard Revenue', '£127,741', '£112,511', '+£15,230', '+13.5%', true],
+        ['Protection Revenue', '£103,185', '£90,712', '+£12,473', '+13.7%', true],
+        ['Screening Revenue', '£20,916', '£17,618', '+£3,298', '+18.7%', true],
+        ['Protection mix', '80.8%', '80.6%', '+0.2pp', '', true],
+        ['Screening mix', '16.4%', '15.7%', '+0.7pp', '', true],
+        ['Protection Rate', '66.8%', '68.2%', '−1.4pp', '', false],
+        ['RPB (total)', '£6.80', '£6.74', '+£0.06', '', true],
+        ['RPB (protection)', '£8.22', '£7.97', '+£0.25', '', true],
+        ['RPB (screening)', '£1.11', '£1.06', '+£0.05', '', true],
+      ]
+    },
+    momNote: 'Revenue growth was broad-based. Screening outpaced Protection on a percentage basis (+18.7% vs +13.7%), driven by Screening Plus and ID Verification. Protection rate slipped 1.4pp to 66.8% as total bookings grew faster than protected bookings. RPB (protection) improved to £8.22, reflecting higher average tier value.',
+  },
+  {
+    label: 'Mar 2026', fy: 'FY26 M12',
+    dashRev: 172618, protRev: 142533, screenRev: 27512, legacyRev: 2573,
+    protRate: 66.1, rpbTotal: 7.59, rpbProt: 9.49, rpbScreen: 1.21,
+    totalBookings: 22729, protBookings: 15014, soBookings: 2274, cbcBookings: 458,
+    tiers: [
+      ['0-500 Protection', 23602, 16.6],
+      ['0-50K Protection', 25858, 18.1],
+      ['0-1M Protection', 7897, 5.5],
+      ['500-50K Protection', 22952, 16.1],
+      ['500-1M Protection', 16276, 11.4],
+      ['500-5M Protection', 45949, 32.2],
+    ],
+    screening: [
+      ['Screening Plus', 11677, 42.4],
+      ['ID Verification', 10181, 37.0],
+      ['Sex Offenders Check', 3281, 11.9],
+      ['Criminal Background Check', 2373, 8.6],
+    ],
+    depHandling: 11080, nActiveTiers: 6, depPerTier: 1847,
+    bookingFees: 2021, listingFees: 552, listingNeg: false,
+    mom: {
+      prior: 'February 2026',
+      rows: [
+        ['Total Dashboard Revenue', '£172,618', '£127,741', '+£44,877', '+35.1%', true],
+        ['Protection Revenue', '£142,533', '£103,185', '+£39,349', '+38.1%', true],
+        ['Screening Revenue', '£27,512', '£20,916', '+£6,596', '+31.5%', true],
+        ['Protection mix', '82.6%', '80.8%', '+1.8pp', '', true],
+        ['Screening mix', '15.9%', '16.4%', '−0.5pp', '', false],
+        ['Protection Rate', '66.1%', '66.8%', '−0.7pp', '', false],
+        ['RPB (total)', '£7.59', '£6.80', '+£0.79', '', true],
+        ['RPB (protection)', '£9.49', '£8.22', '+£1.27', '', true],
+        ['RPB (screening)', '£1.21', '£1.11', '+£0.10', '', true],
+      ]
+    },
+    momNote: 'Strong revenue growth across all product lines (+35.1%). Protection grew faster than Screening (+38.1% vs +31.5%), pushing Protection mix to 82.6%. 0-1M Protection became active for the first time, adding a sixth tier. RPB (protection) rose £1.27 to £9.49 — a significant shift toward higher-value tiers. Legacy lines fell to 1.5% of Dashboard revenue.',
+  },
+  {
+    label: 'Apr 2026', fy: 'FY27 M01',
+    dashRev: 168015, protRev: 142566, screenRev: 24419, legacyRev: 1029,
+    protRate: 65.9, rpbTotal: 7.73, rpbProt: 9.96, rpbScreen: 1.12,
+    totalBookings: 21741, protBookings: 14319, soBookings: 1185, cbcBookings: 238,
+    tiers: [
+      ['0-500 Protection', 19406, 13.6],
+      ['0-50K Protection', 31931, 22.4],
+      ['0-1M Protection', 10783, 7.6],
+      ['500-50K Protection', 24229, 17.0],
+      ['500-1M Protection', 16236, 11.4],
+      ['500-5M Protection', 39982, 28.0],
+    ],
+    screening: [
+      ['Screening Plus', 11107, 45.5],
+      ['ID Verification', 9561, 39.2],
+      ['Criminal Background Check', 2206, 9.0],
+      ['Sex Offenders Check', 1545, 6.3],
+    ],
+    depHandling: 8367, nActiveTiers: 6, depPerTier: 1394,
+    bookingFees: 1159, listingFees: -130, listingNeg: true,
+    mom: {
+      prior: 'March 2026',
+      rows: [
+        ['Total Dashboard Revenue', '£168,015', '£172,618', '−£4,603', '−2.7%', false],
+        ['Protection Revenue', '£142,566', '£142,533', '+£33', '+0.0%', true],
+        ['Screening Revenue', '£24,419', '£27,512', '−£3,093', '−11.2%', false],
+        ['Protection mix', '84.9%', '82.6%', '+2.3pp', '', true],
+        ['Screening mix', '14.5%', '15.9%', '−1.4pp', '', false],
+        ['Protection Rate', '65.9%', '66.1%', '−0.2pp', '', false],
+        ['RPB (total)', '£7.73', '£7.59', '+£0.14', '', true],
+        ['RPB (protection)', '£9.96', '£9.49', '+£0.47', '', true],
+        ['RPB (screening)', '£1.12', '£1.21', '−£0.09', '', false],
+      ]
+    },
+    momNote: 'Dashboard revenue was broadly flat MoM (−2.7%). Protection held steady in absolute terms (+£33) while its mix increased to 84.9% as Deposit Handling contracted. Screening declined −11.2%, driven by a significant fall in Sex Offenders Check bookings (1,185 vs 2,274). RPB (protection) continued to improve to £9.96 — the highest across the Jan–Apr period — reflecting an ongoing shift toward higher-value tiers, notably 0-50K Protection. Listing Fees turned negative (£−130) — flagged for review.',
+  },
 ];
 
-// Screening revenue. Array order: [Screening Plus, ID Verification, Sex Offenders Check, Criminal Background Check]
-const scrn=[
-  [7440,6848,2014,1316],
-  [8907,7853,2499,1657],
-  [11677,10181,3281,2373],
-  [11107,9561,1545,2206]
-];
+const TIER_COLORS = ['#FF40C1','#FF793A','#4B5EE4','#242424','#BBC9DB','#FEE01C'];
+let activeIdx = 0;
+const chartInstances = {};
 
-const dep=[10193,10470,11080,8367],dep_per=[2548,2618,2770,2092];
-const bkfee=[3297,3056,2021,1159],lstfee=[884,584,552,-130];
-const ptot=[90712,103185,142533,142566],stot=[17618,20916,27512,24420];
-const dtot=[112511,127741,172618,168015];
-const rpbt=[6.74,6.80,7.59,7.73],rpbp=[7.97,8.22,9.49,9.96],rpbs=[1.06,1.11,1.21,1.12];
-const prate=[68.2,66.8,66.1,65.9],pbk=[11385,12555,15014,14319],tbk=[16687,18781,22729,21741];
-const sobk=[1252,1801,2274,1185],cbbk=[259,346,458,238];
+function fmt(n) {
+  if (n < 0) return '(£' + Math.abs(Math.round(n)).toLocaleString() + ')';
+  return '£' + Math.round(n).toLocaleString();
+}
+function pct(n) { return n.toFixed(1) + '%'; }
 
-const momLabels=['Total Dashboard Revenue','Protection Revenue','Screening Revenue','Protection mix','Screening mix','Protection Rate','RPB (total)','RPB (protection)','RPB (screening)'];
-const momVals=[
-  ['£112,511','£90,712','£17,618','80.6%','15.7%','68.2%','£6.74','£7.97','£1.06'],
-  ['£127,741','£103,185','£20,916','80.8%','16.4%','66.8%','£6.80','£8.22','£1.11'],
-  ['£172,618','£142,533','£27,512','82.6%','15.9%','66.1%','£7.59','£9.49','£1.21'],
-  ['£168,015','£142,566','£24,420','84.9%','14.5%','65.9%','£7.73','£9.96','£1.12']
-];
-const momMov=[
-  null,
-  ['+£15,230 / +13.5%','+£12,473 / +13.7%','+£3,298 / +18.7%','+0.2pp','+0.7pp','-1.4pp','+£0.06','+£0.25','+£0.05'],
-  ['+£44,877 / +35.1%','+£39,348 / +38.1%','+£6,596 / +31.5%','+1.8pp','-0.5pp','-0.7pp','+£0.79','+£1.27','+£0.10'],
-  ['-£4,603 / -2.7%','+£33 / 0.0%','-£3,092 / -11.2%','+2.3pp','-1.4pp','-0.2pp','+£0.14','+£0.47','-£0.09']
-];
-const momNotes=[
-  '',
-  'Revenue +13.5% MoM. Screening growth (+18.7%) outpaced Protection (+13.7%). Protection rate slipped -1.4pp to 66.8% — bookings grew faster than protected bookings. RPB (protection) improved to £8.22.',
-  'Strong month: +35.1% MoM revenue. Protection +38.1% driven by £500–£50,000 (+58.6% MoM) and £500–£5,000,000 (+41.4% MoM). RPB (protection) surged to £9.49 (+£1.27), the strongest single-month uplift in the period.',
-  'Revenue broadly flat MoM (-2.7%). Protection held in absolute terms (+£33) with RPB reaching £9.96 — series high. Significant mix shift: £500–£50,000 grew to 38.9% of protection (from 33.6%). Screening -11.2% on sharply lower Sex Offenders Check bookings (1,185 vs 2,274). Listing Fees negative (-£130) — credit/adjustment.'
-];
-
-const charts={};
-function f(n){return '£'+Math.round(n).toLocaleString()}
-function fp(n){return n.toFixed(1)+'%'}
-function mc(s){return s&&s.startsWith('+')?'pos':s&&(s.startsWith('-')||s.startsWith('−'))?'neg':''}
-
-function renderMetrics(i){
-  document.getElementById('hperiod').textContent=PERIODS[i];
-  document.getElementById('hfy').textContent=FY[i];
-  document.getElementById('metrics').innerHTML=[
-    ['Dashboard Revenue',f(dtot[i]),PERIODS[i],true],
-    ['Protection Revenue',f(ptot[i]),fp(ptot[i]/dtot[i]*100)+' mix',true],
-    ['Screening Revenue',f(stot[i]),fp(stot[i]/dtot[i]*100)+' mix',false],
-    ['Protection Rate',fp(prate[i]),pbk[i].toLocaleString()+' / '+tbk[i].toLocaleString()+' bookings',false],
-    ['RPB — Total','£'+rpbt[i].toFixed(2),'per booking',false],
-    ['RPB — Protection','£'+rpbp[i].toFixed(2),'per prot. booking',false],
-    ['RPB — Screening','£'+rpbs[i].toFixed(2),'per booking',false],
-    ['Total Bookings',tbk[i].toLocaleString(),'billable',false],
-  ].map(([l,v,s,h])=>`<div class="mc${h?' hi':''}"><div class="ml">${l}</div><div class="mv">${v}</div><div class="ms">${s}</div></div>`).join('');
+// ── TABS ─────────────────────────────────────────────────────────────────────
+function buildTabs() {
+  const el = document.getElementById('tabs');
+  MONTHS.forEach((m, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'tab' + (i === 0 ? ' active' : '');
+    btn.textContent = m.label + ' · ' + m.fy;
+    btn.onclick = () => setMonth(i);
+    el.appendChild(btn);
+  });
 }
 
-function renderTables(i){
-  const pa=PN.map((n,j)=>({n,v:prot[i][j]})).filter(x=>x.v>0);
-  document.getElementById('ptable').innerHTML=
-    '<div class="ct">Protection by coverage</div>'+
-    '<table><thead><tr><th>Coverage</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
-    pa.map(({n,v})=>`<tr><td>${n}</td><td>${f(v)}</td><td>${fp(v/ptot[i]*100)}</td></tr>`).join('')+
-    `<tr class="tb"><td>Subtotal</td><td>${f(ptot[i])}</td><td>100.0%</td></tr></tbody></table>`;
-
-  const sa=SN.map((n,j)=>({n,v:scrn[i][j]})).filter(x=>x.v>0).sort((a,b)=>b.v-a.v);
-  document.getElementById('stable').innerHTML=
-    '<div class="ct">Screening by product</div>'+
-    '<table><thead><tr><th>#</th><th>Product</th><th>Revenue</th><th>Mix</th></tr></thead><tbody>'+
-    sa.map(({n,v},r)=>`<tr><td style="color:#7A7A7A;font-size:11px;font-weight:700">${r+1}</td><td>${n}</td><td>${f(v)}</td><td>${fp(v/stot[i]*100)}</td></tr>`).join('')+
-    `<tr class="tb"><td></td><td>Subtotal</td><td>${f(stot[i])}</td><td>100.0%</td></tr></tbody></table>`;
-
-  const lstNote=lstfee[i]<0?' <strong style="color:#FF793A">(negative — credit/adjustment)</strong>':'';
-  document.getElementById('dnote').innerHTML=
-    `<strong>Deposit Handling (${f(dep[i])})</strong> absorbed evenly across ${pa.length} active protection products (${f(dep_per[i])} each), included in Protection figures above. `+
-    `Booking Fees (${f(bkfee[i])}) and Listing Fees (${f(lstfee[i])})${lstNote} are legacy wind-down lines presented separately in the full monthly Notion page.`;
+// ── SET MONTH ─────────────────────────────────────────────────────────────────
+function setMonth(i) {
+  activeIdx = i;
+  document.querySelectorAll('.tab').forEach((t, j) => t.classList.toggle('active', j === i));
+  renderMonth(MONTHS[i], i);
 }
 
-function renderMoM(i){
-  const w=document.getElementById('momwrap'),t=document.getElementById('momtitle');
-  if(i===0){w.style.display='none';t.style.display='none';return;}
-  t.style.display='block';w.style.display='block';
-  const cur=momVals[i],prev=momVals[i-1],mov=momMov[i];
-  w.innerHTML='<table><thead><tr><th>Metric</th><th>'+MONTHS[i]+'</th><th>'+MONTHS[i-1]+'</th><th>Movement</th></tr></thead><tbody>'+
-    momLabels.map((l,j)=>`<tr><td>${l}</td><td>${cur[j]}</td><td>${prev[j]}</td><td class="${mc(mov[j])}">${mov[j]}</td></tr>`).join('')+
-    '</tbody></table><div class="mom-note">'+momNotes[i]+'</div>';
+function renderMonth(m, i) {
+  const el = document.getElementById('month-content');
+
+  // Protection doughnut data
+  const tierLabels = m.tiers.map(t => t[0]);
+  const tierData = m.tiers.map(t => t[1]);
+  const tierColors = TIER_COLORS.slice(0, m.tiers.length);
+
+  // Screening doughnut data
+  const screenLabels = m.screening.map(s => s[0]);
+  const screenData = m.screening.map(s => s[1]);
+  const screenColors = ['#FF40C1','#242424','#BBC9DB','#FF793A'];
+
+  // Listing fees display
+  const listingDisplay = m.listingNeg
+    ? `<span class="neg">(£${Math.abs(m.listingFees).toLocaleString()}) ⚠️ negative — credit or adjustment</span>`
+    : `£${m.listingFees.toLocaleString()}`;
+
+  // MoM section
+  let momHTML = '';
+  if (m.mom) {
+    const rowsHTML = m.mom.rows.map(r => {
+      const movClass = r[4] === '' ? (r[5] ? 'pos' : 'neg-val') : (r[5] ? 'pos' : 'neg-val');
+      const movCell = r[4] !== '' ? `<td class="${r[5] ? 'pos' : 'neg-val'}">${r[3]} (${r[4]})</td>` : `<td class="${r[5] ? 'pos' : 'neg-val'}">${r[3]}</td>`;
+      return `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td>${movCell}</tr>`;
+    }).join('');
+    momHTML = `
+    <div class="mom-wrap">
+      <div class="mom-title">MoM Movement vs ${m.mom.prior}</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Current</th><th>Prior</th><th>Movement</th></tr></thead>
+        <tbody>${rowsHTML}</tbody>
+      </table>
+      <div class="mom-note">${m.momNote}</div>
+    </div>`;
+  }
+
+  el.innerHTML = `
+  <!-- METRICS -->
+  <div class="metrics">
+    <div class="card hi"><div class="card-label">Dashboard Revenue</div><div class="card-value">${fmt(m.dashRev)}</div></div>
+    <div class="card hi"><div class="card-label">Protection Revenue</div><div class="card-value">${fmt(m.protRev)}</div></div>
+    <div class="card"><div class="card-label">Screening Revenue</div><div class="card-value">${fmt(m.screenRev)}</div></div>
+    <div class="card"><div class="card-label">Protection Rate</div><div class="card-value">${pct(m.protRate)}</div></div>
+    <div class="card"><div class="card-label">RPB Total</div><div class="card-value">£${m.rpbTotal.toFixed(2)}</div></div>
+    <div class="card"><div class="card-label">RPB Protection</div><div class="card-value">£${m.rpbProt.toFixed(2)}</div></div>
+    <div class="card"><div class="card-label">RPB Screening</div><div class="card-value">£${m.rpbScreen.toFixed(2)}</div></div>
+    <div class="card"><div class="card-label">Total Bookings</div><div class="card-value">${m.totalBookings.toLocaleString()}</div></div>
+  </div>
+
+  <!-- CHARTS -->
+  <div class="charts-row">
+    <div class="chart-wrap">
+      <div class="chart-title">Protection by Tier</div>
+      <div class="chart-legend" id="prot-legend-${i}"></div>
+      <div class="chart-canvas-wrap"><canvas id="protChart-${i}"></canvas></div>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-title">Screening by Product</div>
+      <div class="chart-legend" id="screen-legend-${i}"></div>
+      <div class="chart-canvas-wrap"><canvas id="screenChart-${i}"></canvas></div>
+    </div>
+  </div>
+
+  <!-- TABLES -->
+  <div class="tables-row">
+    <div class="table-wrap">
+      <div class="table-title">Protection</div>
+      <table>
+        <thead><tr><th>Tier</th><th>Revenue</th><th>Mix</th></tr></thead>
+        <tbody>
+          ${m.tiers.map(t => `<tr><td>${t[0]}</td><td>${fmt(t[1])}</td><td>${t[2].toFixed(1)}%</td></tr>`).join('')}
+          <tr class="tb"><td>Protection Subtotal</td><td>${fmt(m.protRev)}</td><td>100.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-wrap">
+      <div class="table-title">Screening</div>
+      <table>
+        <thead><tr><th>#</th><th>Product</th><th>Revenue</th><th>Mix</th></tr></thead>
+        <tbody>
+          ${m.screening.map((s, j) => `<tr><td>${j+1}</td><td>${s[0]}</td><td>${fmt(s[1])}</td><td>${s[2].toFixed(1)}%</td></tr>`).join('')}
+          <tr class="tb"><td></td><td>Screening Subtotal</td><td>${fmt(m.screenRev)}</td><td>100.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="note">
+    <strong>Deposit Handling:</strong> Total £${m.depHandling.toLocaleString()} absorbed evenly across ${m.nActiveTiers} active tiers (£${m.depPerTier.toLocaleString()} per tier). All tier revenues above are inclusive of this allocation.<br>
+    <strong>Legacy lines (wind-down):</strong> Booking Fees £${m.bookingFees.toLocaleString()} | Listing Fees ${listingDisplay} | Legacy Subtotal ${fmt(m.bookingFees + m.listingFees)}
+  </div>
+
+  <!-- RECON -->
+  <div class="recon">Total Dashboard Revenue: ${fmt(m.dashRev)} ✓&nbsp; (Protection ${fmt(m.protRev)} + Screening ${fmt(m.screenRev)} + Legacy ${fmt(m.legacyRev)} = ${fmt(m.dashRev)})</div>
+
+  ${momHTML}
+
+  <!-- BOOKINGS -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:24px;">
+    <div class="table-wrap">
+      <div class="table-title">Bookings & Mix</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>Total billable bookings</td><td>${m.totalBookings.toLocaleString()}</td></tr>
+          <tr><td>Protected bookings</td><td>${m.protBookings.toLocaleString()}</td></tr>
+          <tr><td>Protection rate</td><td>${pct(m.protRate)}</td></tr>
+          <tr><td>Sex Offender Check bookings</td><td>${m.soBookings.toLocaleString()}</td></tr>
+          <tr><td>Criminal Background Check bookings</td><td>${m.cbcBookings.toLocaleString()}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-wrap">
+      <div class="table-title">Revenue per Booking</div>
+      <table>
+        <thead><tr><th>Metric</th><th>Value</th></tr></thead>
+        <tbody>
+          <tr><td>RPB — total Dashboard</td><td>£${m.rpbTotal.toFixed(2)}</td></tr>
+          <tr><td>RPB — protection (per protected booking)</td><td>£${m.rpbProt.toFixed(2)}</td></tr>
+          <tr><td>RPB — screening (per total booking)</td><td>£${m.rpbScreen.toFixed(2)}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+
+  // Destroy old charts if they exist
+  ['protChart-' + i, 'screenChart-' + i].forEach(id => {
+    if (chartInstances[id]) { chartInstances[id].destroy(); delete chartInstances[id]; }
+  });
+
+  // Protection doughnut
+  const pc = document.getElementById('protChart-' + i).getContext('2d');
+  chartInstances['protChart-' + i] = new Chart(pc, {
+    type: 'doughnut',
+    data: { labels: tierLabels, datasets: [{ data: tierData, backgroundColor: tierColors, borderColor: '#F7EFE5', borderWidth: 3 }] },
+    options: { cutout: '65%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': £' + ctx.parsed.toLocaleString() } } } }
+  });
+  const pl = document.getElementById('prot-legend-' + i);
+  tierLabels.forEach((l, j) => { pl.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${tierColors[j]}"></span>${l}</span>`; });
+
+  // Screening doughnut
+  const sc = document.getElementById('screenChart-' + i).getContext('2d');
+  chartInstances['screenChart-' + i] = new Chart(sc, {
+    type: 'doughnut',
+    data: { labels: screenLabels, datasets: [{ data: screenData, backgroundColor: screenColors, borderColor: '#F7EFE5', borderWidth: 3 }] },
+    options: { cutout: '65%', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.label + ': £' + ctx.parsed.toLocaleString() } } } }
+  });
+  const sl = document.getElementById('screen-legend-' + i);
+  screenLabels.forEach((l, j) => { sl.innerHTML += `<span class="legend-item"><span class="legend-dot" style="background:${screenColors[j]}"></span>${l}</span>`; });
 }
 
-function donut(id,data,cols){
-  if(charts[id]){charts[id].data.datasets[0].data=data;charts[id].data.datasets[0].backgroundColor=cols;charts[id].update();return;}
-  charts[id]=new Chart(document.getElementById(id),{type:'doughnut',data:{datasets:[{data,backgroundColor:cols,borderWidth:3,borderColor:'#F7EFE5'}]},options:{responsive:true,maintainAspectRatio:false,cutout:'65%',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const t=data.reduce((a,b)=>a+b,0);return ' '+f(c.parsed)+' ('+(c.parsed/t*100).toFixed(1)+'%)';}}}}}}); 
+// ── TRENDS ───────────────────────────────────────────────────────────────────
+function buildTrends() {
+  const labels = MONTHS.map(m => m.label);
+
+  // 1. Stacked bar: Protection vs Screening
+  const t1 = document.getElementById('trendStack').getContext('2d');
+  new Chart(t1, {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Protection', data: MONTHS.map(m => m.protRev), backgroundColor: '#FF40C1', stack: 'a' },
+        { label: 'Screening', data: MONTHS.map(m => m.screenRev), backgroundColor: '#242424', stack: 'a' },
+        { label: 'Legacy', data: MONTHS.map(m => m.legacyRev), backgroundColor: '#BBC9DB', stack: 'a' },
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0ebe3' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } } } }
+  });
+
+  // 2. Grouped bar: Protection by tier (all months)
+  const allTierNames = ['0-500 Protection','0-50K Protection','0-1M Protection','500-50K Protection','500-1M Protection','500-5M Protection'];
+  const tierDatasets = allTierNames.map((tn, j) => ({
+    label: tn,
+    data: MONTHS.map(m => { const t = m.tiers.find(x => x[0] === tn); return t ? t[1] : 0; }),
+    backgroundColor: TIER_COLORS[j],
+  }));
+  const t2 = document.getElementById('trendTier').getContext('2d');
+  new Chart(t2, {
+    type: 'bar',
+    data: { labels, datasets: tierDatasets },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0ebe3' }, ticks: { callback: v => '£' + (v/1000).toFixed(0) + 'k' } } } }
+  });
+
+  // 3. Line: RPB
+  const t3 = document.getElementById('trendRPB').getContext('2d');
+  new Chart(t3, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'RPB Total', data: MONTHS.map(m => m.rpbTotal), borderColor: '#FF40C1', backgroundColor: 'rgba(255,64,193,0.08)', borderWidth: 2.5, pointRadius: 4, pointBackgroundColor: '#FF40C1', tension: 0.3, fill: false },
+        { label: 'RPB Protection', data: MONTHS.map(m => m.rpbProt), borderColor: '#242424', borderDash: [5,3], borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#242424', tension: 0.3, fill: false },
+        { label: 'RPB Screening', data: MONTHS.map(m => m.rpbScreen), borderColor: '#4B5EE4', borderDash: [5,3], borderWidth: 2, pointRadius: 4, pointBackgroundColor: '#4B5EE4', tension: 0.3, fill: false },
+      ]
+    },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { boxWidth: 12, font: { size: 11 } } } }, scales: { x: { grid: { display: false } }, y: { grid: { color: '#f0ebe3' }, ticks: { callback: v => '£' + v.toFixed(2) } } } }
+  });
 }
 
-function legend(id,names,cols){
-  document.getElementById(id).innerHTML=names.map((n,j)=>`<span class="li"><span class="ls" style="background:${cols[j]}"></span>${n}</span>`).join('');
-}
-
-function setMonth(i){
-  document.querySelectorAll('.tab').forEach((t,j)=>t.classList.toggle('active',j===i));
-  renderMetrics(i);
-  const pd=prot[i].filter(v=>v>0),pc2=prot[i].map((v,j)=>v>0?PC[j]:null).filter(Boolean);
-  const pn2=PN.filter((_,j)=>prot[i][j]>0);
-  legend('lprot',pn2,pc2);
-  donut('cprot',pd,pc2);
-  const sd=scrn[i].filter(v=>v>0),sc2=scrn[i].map((v,j)=>v>0?SC[j]:null).filter(Boolean);
-  const sn2=SN.filter((_,j)=>scrn[i][j]>0);
-  legend('lscreen',sn2,sc2);
-  donut('cscreen',sd,sc2);
-  renderTables(i);
-  renderMoM(i);
-}
-
-function buildTrends(){
-  legend('ltrend',PN,PC);
-  charts.csplit=new Chart(document.getElementById('csplit'),{type:'bar',data:{labels:MONTHS,datasets:[{label:'Protection',data:ptot,backgroundColor:T,borderRadius:4,borderSkipped:false,stack:'s'},{label:'Screening',data:stot,backgroundColor:NV,borderRadius:0,borderSkipped:false,stack:'s'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}},stacked:true},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'},stacked:true}}}});
-
-  charts.ctrend=new Chart(document.getElementById('ctrend'),{type:'bar',data:{labels:MONTHS,datasets:PN.map((n,i)=>({label:n,data:prot.map(m=>m[i]),backgroundColor:PC[i],borderRadius:3,borderSkipped:false}))},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>c.dataset.label+': '+f(c.parsed.y)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+Math.round(v/1000)+'k'}}}}});
-
-  charts.crpb=new Chart(document.getElementById('crpb'),{type:'line',data:{labels:MONTHS,datasets:[{label:'Total RPB',data:rpbt,borderColor:T,pointBackgroundColor:T,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent'},{label:'Protection RPB',data:rpbp,borderColor:NV,pointBackgroundColor:NV,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[5,3]},{label:'Screening RPB',data:rpbs,borderColor:PU,pointBackgroundColor:PU,tension:.35,borderWidth:2.5,pointRadius:5,backgroundColor:'transparent',borderDash:[2,2]}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>' £'+c.parsed.y.toFixed(2)}}},scales:{x:{grid:{display:false},ticks:{color:'#7A7A7A',font:{size:11}}},y:{grid:{color:'rgba(0,0,0,.08)'},ticks:{color:'#7A7A7A',font:{size:11},callback:v=>'£'+v.toFixed(2)},min:0,max:12}}}});
-}
-
-const tabsEl=document.getElementById('tabs');
-MONTHS.forEach((m,i)=>{const b=document.createElement('button');b.className='tab'+(i===0?' active':'');b.textContent=m;b.onclick=()=>setMonth(i);tabsEl.appendChild(b);});
-document.getElementById('fdate').textContent='Generated '+new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+// ── INIT ──────────────────────────────────────────────────────────────────────
+buildTabs();
 setMonth(0);
 buildTrends();
 </script>
